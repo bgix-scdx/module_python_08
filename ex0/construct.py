@@ -1,4 +1,5 @@
 import sys
+import site
 import os
 
 
@@ -26,8 +27,18 @@ def color(message: any, tcol: tuple = (255, 255, 255),
 
 print(sys.base_prefix, sys.prefix)
 color("\n==> welcome to the Matrix <==\n", tcol=(255, 105, 255), bold=True)
+color(f"Current python: {sys.executable}\n", tcol=(0, 255, 0))
 if sys.prefix != sys.base_prefix:
-    color("You are secured by a VM", tcol=(0, 255, 0))
+    color("Status: ", tcol=(0, 255, 0), bold=True, finish="")
+    color("VM, You are secured !\n"
+          "Installations won't affect the global environement.\n",
+          tcol=(155, 255, 155), bold=True)
+    color(f"Virtual Environement: {os.path.basename(sys.prefix)}",
+          tcol=(105, 255, 105))
+    color(f"Environement Path: {sys.prefix}\n",
+          tcol=(105, 255, 105))
+    color(f"Package: {site.getsitepackages()[0]}\n",
+          tcol=(105, 255, 105))
 else:
     color("WARNING: ", tcol=(255, 0, 0),
           bold=True, finish="")
@@ -40,7 +51,7 @@ else:
     color(" ► python -m venv matrix_env", tcol=(255, 255, 155))
     color(" ► source matrix_env/bin/activate", tcol=(255, 255, 155),
           finish="")
-    color(" # On Unix", tcol=(105, 105, 105))
+    color(" # On Unix\n", tcol=(105, 105, 105))
 
     color(" ► matrix_env", tcol=(255, 255, 155))
     color(" ► Scripts", tcol=(255, 255, 155))
